@@ -17,6 +17,7 @@
                         <th>Schermgrootte</th>
                         <th>Releasedatum</th>
                         <th>MegaPixels</th>
+                        <th>Verwijder</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,14 @@
                             <td><?= $smartphone->Schermgrootte; ?></td>
                             <td><?= $smartphone->Releasedatum; ?></td>
                             <td><?= $smartphone->MegaPixels; ?></td>
+
+                            <td class="text-center">
+                                <a href="<?= URLROOT; ?>/SmartphoneController/delete/<?= $smartphone->Id; ?>"
+                                   onclick="return confirm('Weet je zeker dat je dit record wilt verwijderen?');">
+                                   <i class="bi bi-trash3-fill text-danger"></i>
+                                </a>
+                            </td>
+
                         </tr>
                     <?php endforeach; ?>
 

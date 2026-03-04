@@ -9,15 +9,26 @@ class SmartphoneController extends BaseController
         $this->smartphoneModel = $this->model('Smartphone');
     }
 
-    public function index()
+    public function index($display='none', $message='')
     {
         $result = $this->smartphoneModel->getAllSmartphones();
 
         $data = [
-            'title'  => 'Overzicht Smartphones',
+            'title' => 'Overzicht Smartphones',
+            'display' => $display,
+            'message' => $message,
             'result' => $result
         ];
 
         $this->view('smartphone/index', $data);
+    }
+
+    public function delete($Id)
+    {
+        $result = $this->smartphoneModel->delete($Id);
+
+        header('Refresh:3; url=' . URLROOT . '/SmartphoneController/index');
+
+        $this->index('flex', 'Record is verwijderd');
     }
 }
