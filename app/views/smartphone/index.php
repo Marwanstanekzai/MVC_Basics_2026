@@ -4,9 +4,30 @@
     <div class="row mt-3 d-flex justify-content-center">
         <div class="col-10">
 
-            <h3><?php echo $data['title']; ?></h3>
+            <h3><?= $data['title']; ?></h3>
 
-            <table class="table table-striped">
+            <!-- ✅ SUCCES MELDING -->
+            <?php if($data['display'] == 'flex') : ?>
+                <div class="alert alert-success">
+                    <?= $data['message']; ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- KNOP NIEUW -->
+            <div class="row mt-3">
+                <div class="col-10 text-begin text-danger">
+
+                    <a href="<?= URLROOT; ?>/SmartphoneController/create"
+                       class="btn btn-warning"
+                       role="button">
+                       Nieuwe smartphone
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- TABEL -->
+            <table class="table table-striped mt-3">
                 <thead>
                     <tr>
                         <th>Merk</th>
@@ -17,13 +38,16 @@
                         <th>Schermgrootte</th>
                         <th>Releasedatum</th>
                         <th>MegaPixels</th>
+                        <th>Wijzigen</th>
                         <th>Verwijder</th>
                     </tr>
                 </thead>
+
                 <tbody>
 
                     <?php foreach($data['result'] as $smartphone) : ?>
                         <tr>
+
                             <td><?= $smartphone->Merk; ?></td>
                             <td><?= $smartphone->Model; ?></td>
                             <td><?= $smartphone->Prijs; ?></td>
@@ -33,6 +57,14 @@
                             <td><?= $smartphone->Releasedatum; ?></td>
                             <td><?= $smartphone->MegaPixels; ?></td>
 
+                            <!-- EDIT -->
+                            <td class="text-center">
+                                <a href="<?= URLROOT; ?>/SmartphoneController/edit/<?= $smartphone->Id; ?>">
+                                    ✏️
+                                </a>
+                            </td>
+
+                            <!-- DELETE -->
                             <td class="text-center">
                                 <a href="<?= URLROOT; ?>/SmartphoneController/delete/<?= $smartphone->Id; ?>"
                                    onclick="return confirm('Weet je zeker dat je dit record wilt verwijderen?');">
@@ -44,6 +76,7 @@
                     <?php endforeach; ?>
 
                 </tbody>
+
             </table>
 
             <a href="<?= URLROOT; ?>/homepages/index">← Terug</a>
